@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
  * @author Vishal Rana
  *
  */
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController // Combines @Controller & @ResponseBody (detects custom beans, marks business/presentation
 				//  layer & converts return value into appropriate format [JSON/XML] based on request.
 @RequestMapping("/delivery") // map a request url to a class(root-mapping)/method.
