@@ -42,12 +42,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
 	@Override
 	public DeliveryEntity update(DeliveryEntity bean) throws RecordNotFoundException {
-		Optional<DeliveryEntity> optional = dao.findByDeliveryId(bean.getDeliveryId());
-		if (optional.isPresent()) {
-			throw new RecordNotFoundException("Name not found");
-		} else {
 			return dao.save(bean);
-		}
 	}
 
 	@Override
