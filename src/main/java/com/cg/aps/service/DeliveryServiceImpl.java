@@ -22,10 +22,12 @@ import com.cg.aps.repository.DeliveryDao;
  *
  */
 @Service("DeliveryService") // specializations of @Component, marks service layer
-@Transactional // Inject transactional logic for starting and committing the transaction using proxies
+@Transactional // Inject transactional logic for starting and committing the transaction using
+				// proxies
 public class DeliveryServiceImpl implements DeliveryService {
 
-	@Autowired // Inject object dependencies implicitly (can be applied over setter, property, constructor)
+	@Autowired // Inject object dependencies implicitly (can be applied over setter, property,
+				// constructor)
 	DeliveryDao dao;
 
 	@Override
@@ -40,7 +42,8 @@ public class DeliveryServiceImpl implements DeliveryService {
 
 	@Override
 	public DeliveryEntity update(DeliveryEntity bean) throws RecordNotFoundException {
-		if (bean.getOwnerName().isBlank()) {
+		Optional<DeliveryEntity> optional = dao.findByDeliveryId(bean.getDeliveryId());
+		if (optional.isPresent()) {
 			throw new RecordNotFoundException("Name not found");
 		} else {
 			return dao.save(bean);
@@ -76,8 +79,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 			throw new RecordNotFoundException("Invalid id");
 		}
 	}
+
 	@Override
 	public List<DeliveryEntity> search() throws DatabaseException {
-			return dao.findAll();
+		return dao.findAll();
 	}
 }
